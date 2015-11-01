@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+<script>
+    window.onload=function(){
+        var timedate = new Date("2,14,2016");
+        var now = new Date();
+        var date = timedate.getTime() - now.getTime();
+        var time = Math.ceil(date / (1000 * 60 * 60 * 24));
+        if (time > 0) {
+            document.getElementById('timeShow').innerHTML = time;
+          
+        }
+    }
+</script>
+</head>
+<body>
+    <div class="txtshow">距离2015年研究生考试时间还有<span id="timeShow"></span>天</div>
+</body>
+</html>
