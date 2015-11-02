@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<style>
+    #div1 {
+        width:100px;height:100px;background:red;position:absolute;left:0;top:50px;
+    }
+</style>
+<script>
+    function startMove() {
+        var oDiv = document.getElementById('div1');
+        setInterval(function () {
+            var speed = (300 - oDiv.offsetLeft) / 10;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+        }, 30)
+    };
+
+</script>
+<body>
+    <input type="button" value="start" onclick="    startMove();"/>
+<div id="div1"></div>
+</body>
+</html>
