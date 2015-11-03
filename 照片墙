@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{margin:0;padding:0;}
+    #ul1{width:660px;position:relative;margin:10px auto;}
+    #ul1 li{list-style:none;width:200px;height:200px;margin:10px;float:left;z-index:1;}
+    .div{background:red;width:200px;height:200px;}
+    #ul1 .active{border:1px dashed black;}
+    </style>
+    <script>
+    window.onload=function(){
+        var oUl=document.getElementById('ul1');
+        var aLi=document.getElementsByTagName('li');
+        var i=0;
+        var iMinzindex=2;
+        var aPos=[];
+
+        //布局转换
+        for(i=0;i<aLi.length;i++){
+            aPos[i]={left:aLi[i].offsetLeft,top:aLi[i].offsetTop};
+        }
+        for(i=0;i<aLi.length;i++){
+            aLi[i].style.left=aPos[i].left+'px';
+            aLi[i].style.top=aPos[i].top+'px';
+            aLi[i].style.position='absolute';
+            aLi[i].style.margin=0;
+        }
+
+        //拖拽
+        for(i=0;i<aLi.length;i++){
+            setDrag(aLi[i]);
+        }
+        function setDrag(obj){
+            obj.onmousedown=function(ev){
+                var oEvent=ev||event;
+                var disX=oEvent.clientX-obj.offsetLeft;
+                var disY=oEvent.clientY-obj.offsetTop;
+                obj.style.zIndex=iMinzindex++;
+
+                document.onmousemove=function(ev){
+                    var oEvent=ev||event;
+                    obj.style.left=oEvent.clientX-disX+'px';
+                    obj.style.top=oEvent.clientY-disY+'px';
+                      for(i=0;i<aLi.length;i++){
+                        aLi[i].className='';}
+                        var oNear=findNearest(obj);
+                        if(oNear){
+                            oNear.className='active';
+                        }
+                     /*for(i=0;i<aLi.length;i++){
+                        aLi[i].className='';
+                        if(obj==aLi[i]) continue;
+                        if(cdTest(obj,aLi[i])){
+                                aLi[i].className='active';
+                        }
+                     }*/
+                }
+
+                 document.onmouseup=function(){
+                    document.onmousedown=null;
+                    document.onmousemove=null;
+                 }
+                 return false;
+            }
+        }
+
+        //碰撞检测
+        function cdTest(obj1,obj2){
+            var l1=obj1.offsetLeft;
+            var r1=obj1.offsetLeft+obj1.offsetWidth;
+            var t1=obj1.offsetTop;
+            var b1=obj1.offsetTop+obj1.offsetHeight;
+
+            var l2=obj2.offsetLeft;
+            var r2=obj2.offsetLeft+obj2.offsetWidth;
+            var t2=obj2.offsetTop;
+            var b2=obj2.offsetTop+obj2.offsetHeight;
+
+            if(r1<l2 || l1>r2 || b1<t2 || t1>b2){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        //找到碰上的并且最近的
+        function getDis(obj1,obj2){
+            var a=obj1.offsetLeft-obj2.offsetLeft;
+            var b=obj1.offsetTop-obj2.offsetTop;
+
+            return Math.sqrt(a*a+b*b);
+        }
+
+        function findNearest(obj){
+            var iMin=99999;
+            var iMinIndex=-1;
+            for(i=0;i<aLi.length;i++){
+                if(obj==aLi[i]) continue;
+
+                if(cdTest(obj,aLi[i])){
+                    var dis=getDis(obj,aLi[i]);
+                    if(iMin>dis){
+                        iMin=dis;
+                        iMinIndex=i;
+                    }
+                }
+            }
+            if(iMinIndex==-1){
+                return null;
+            }else{
+                return aLi[iMinIndex];
+            }
+        }
+    }</script>
+</head>
+<body>
+        <ul id="ul1">
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+            <li><div class="div"></div></li>
+        </ul>
+</body>
+</html>
