@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script>
+        function myAddEvent(obj, ev, fn)
+        {
+            if (obj.attachEvent) {
+                obj.attachEvent('on' + ev, fn);
+            }
+            else {
+                obj.addEventListener(ev, fn, false);
+            }
+
+        }
+//事件绑定：同一事件执行多个函数
+        window.onload = function () {
+            var oBtn = document.getElementById('btn1');
+            //attachEvent(事件名，函数)  IE
+           /* oBtn.attachEvent('onclick', function () {
+                alert('a')
+            });*/
+            //addEventListener(事件名，函数，false) FF
+            /* oBtn.addEventListener('click', function () {
+                alert('a');
+            }, false);*/
+            myAddEvent(oBtn, 'click', function () {
+                alert('a');
+            })
+        }
+    </script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="按钮"/>
+</body>
+</html>
