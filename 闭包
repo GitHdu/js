@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+</head>
+<!--1、什么是闭包？
+函数嵌套函数，内部函数可以引用外部函数的参数和变量
+2、闭包有什么好处？
+希望一个变量长期驻扎在内存中；避免全局变量的污染；私有成员的存在
+3、IE下会引发内存泄漏
+-->
+<script>
+/*    var aaa=(function(){
+        var a=1;
+        return function(){
+            a++;
+            alert(a);
+        };
+    })();
+    aaa();//2
+    aaa();//3  */
+    function makeAdder(a) {
+    return function(b) {
+        return a + b;
+    }
+}
+x = makeAdder(5);
+y = makeAdder(20);
+x(6); // 11
+y(7); // 27
+     var aaa=(function(){
+        var a=1;
+       function bbb(){
+            a++;
+            alert(a);
+        };
+        function ccc(){
+            a++;
+            alert(a);
+        };
+        return{
+            b:bbb,
+            c:ccc
+        }
+    })();
+    aaa.b();//2
+    aaa.c();//3
+</script>
+<body>
+
+</body>
+</html>
