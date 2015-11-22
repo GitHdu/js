@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        #parent {
+        width:600px;height:20px;background:#ccc;position:relative;margin:10px auto;
+        }
+        #div1 {
+        width:20px;height:20px;background:red;position:absolute;left:0;top:0;
+        }
+        #div2 {
+       width:400px;height:300px;border:1px solid black; overflow:hidden;position:relative;
+        }
+         #div3 {
+       position:absolute;left:0;top:0; padding:4px;
+        }
+    </style>
+    <script>
+        window.onload = function ()
+        {
+            var oDiv = document.getElementById('div1');
+            var oParent = document.getElementById('parent');
+            var oDiv2 = document.getElementById('div2');
+            var oDiv3 = document.getElementById('div3');
+
+            var disX=0;
+
+            oDiv.onmousedown = function (ev) {
+                var oEvent = ev || event;
+
+                disX = oEvent.clientX - oDiv.offsetLeft;
+
+                document.onmousemove = function (ev) {
+                    var oEvent = ev || event;
+                    var l = oEvent.clientX - disX;
+
+                    if (l < 0) {
+                        l = 0;
+                    } else if (l > oParent.offsetWidth- oDiv.offsetWidth) {
+                        l = oParent.offsetWidth - oDiv.offsetWidth;
+                    }
+                   
+
+                    oDiv.style.left = l + 'px';
+                    var scale = l / (oParent.offsetWidth - oDiv.offsetWidth);
+                    document.title = scale;
+                    
+                    oDiv3.style.top = (oDiv2.offsetHeight-oDiv3.offsetHeight) * scale + 'px';
+                   
+                }
+
+                document.onmouseup=function(){
+                    document.onmousemove = null;
+                  
+                   
+
+                }
+
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="parent">
+    <div id="div1"></div>
+</div>
+    <div id="div2">
+        <div id="div3">前言
+HTML5的出现让移动平台的竞争由系统平台转向了浏览器之间：移动端的IE、Chrome、FireFox、Safari，亦或是新出现的浏览器，谁能达到在移动端对HTML5更好的支持，谁就能在以后的移动应用领域占据更多的市场。
+现在我们怎么装APP
+有了HTML5以后怎么装APP
+更灵活、更方便的app使用及安装方式将成为HTML5在移动平台上大放异彩的保障之一。
+
+下面列举HTML5适合移动应用开发的几大特性：
+
+1.离线缓存为HTML5开发移动应用提供了基础
+
+HTML5 Web Storage API可以看做是加强版的cookie，不受数据大小限制，有更好的弹性以及架构，可以将数据写入到本机的ROM中，还可以在关闭浏览器后再次打开时恢复数据，以减少网络流量。
+
+同时，这个功能算得上是另一个方向的后台“操作记录”，而不占用任何后台资源，减轻设备硬件压力，增加运行流畅性。
+
+在线app支持边使用边下载离线缓存，或者不下载离线缓存；而离线app必须是下载完离线缓存才能使用。
+
+形象点说，cookie就是存了电话和菜单，想吃什么要叫外卖，等多长时间才能吃到就得看交通情况了；离线缓存就是直接在冰箱里存了食物，想吃就能马上吃到（当然，想吃最新的食物同样可以打电话预定）。
+
+设计师要知道，什么时候让用户下载离线缓存（注意在线和离线app的区别）。
+
+2.音频视频自由嵌入，多媒体形式更为灵活
+
+原生开发方式对于文字和音视频混排的多媒体内容处理相对麻烦，需要拆分开文字、图片、音频、视频，解析对应的URL并分别用不同的方式处理。
+
+HTML5在这个方面完全不受限制，可以完全放在一起进行处理。
+
+设计师要知道，如果新闻类、微博类、社交类应用的信息呈现中实现文字与多媒体混排，而不用专门嵌入webview，将是一件多美好的事情，至少现在原生方式实现起来还有困难。
+
+3.地理定位，随时随地分享位置
+
+充分发挥移动设备对定位上的优势，推动LBS应用发展。
+
+可以综合使用GPS、wifi、手机等方式让定位更为精准、灵活。
+
+地理位置定位，让定位和导航不再专属导航软件，地图也不用下载非常大的地图包，可以通过缓存来解决，到哪儿下哪儿，更灵活。
+
+设计师要知道，现在嵌入LBS功能的应用越来越多，这也是移动设备与台式PC相比最大的优势之一，HTML5能把这个优势再度扩大化，好好想想怎么在你设计的应用里用上吧！
+
+4.Canvas绘图，提升移动平台的绘图能力
+
+使用Canvas API可以简单绘制热点图收集用户体验资料
+
+支持图片的移动、旋转、缩放等常规编辑
+
+Canvas – 2D的绘图功能支持
+
+Canvas 3D – 3D的绘图功能支持
+
+SVG – 向量图支援
+
+设计师要知道，图片的移动、旋转、缩放？那都太基础了，自己画都是小case，至于怎么用，好好想想吧！</div>
+    </div>
+</body>
+</html>
