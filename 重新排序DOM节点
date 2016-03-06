@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script>
+    window.onload=function(){
+        var arr = new Array();
+var obj = document.getElementsByClassName('lang');
+
+for (var item=0;item<obj.length;item++)
+{
+arr.push(obj[item].innerText);
+}
+arr.sort();
+
+var parent = document.getElementById('test-list');
+parent.innerHTML = '';
+for (var str=0;str<arr.length; str++)
+{
+var newobj = document.createElement('li');
+newobj.innerText = arr[str];
+parent.appendChild(newobj);
+}
+    }
+</script>
+<body>
+    <ol id="test-list">
+    <li class="lang">Scheme</li>
+    <li class="lang">JavaScript</li>
+    <li class="lang">Python</li>
+    <li class="lang">Ruby</li>
+    <li class="lang">Haskell</li>
+</ol>
+</body>
+</html>
