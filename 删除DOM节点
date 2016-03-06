@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script>
+    window.onload=function(){
+        var lis = document.querySelectorAll("#test-list li");
+        var left = lis.length;
+
+        for (var i=0;i<left;i++) {
+            var li = lis[i];
+            var arr=["HTML", "CSS", "JAVASCRIPT"];
+            if (arr.indexOf(li.innerText.toUpperCase()) === -1) {
+                li.parentElement.removeChild(li);
+            }
+    }
+}
+</script>
+<body>
+ <ul id="test-list">
+    <li>JavaScript</li>
+    <li>Swift</li>
+    <li>HTML</li>
+    <li>ANSI C</li>
+    <li>CSS</li>
+    <li>DirectX</li>
+</ul>
+</body>
+</html>
