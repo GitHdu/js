@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="MyModule">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <body>
+        <hello></hello>
+        <script>
+        var myModule = angular.module('MyModule', []);
+        myModule.directive('hello', function() {
+            return{
+                restrict:"E",
+                template:'<div>Hi everyone!</div>',
+                repalce:true
+            }
+        });
+        </script>
+    </body>
+</html>
