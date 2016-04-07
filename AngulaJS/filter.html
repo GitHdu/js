@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="test">
+<head>
+<meta charset="utf-8">
+<title>filter</title>
+<script src="angular.js"></script>
+<script>
+var app=angular.module('test', []);
+
+app.filter('time2date', function (){
+	function toDou(n)
+	{
+		return n<10?'0'+n:''+n;
+	}
+
+	return function (input){
+		var oDate=new Date();
+		oDate.setTime(input*1000);
+
+		return oDate.getFullYear()+'年'+toDou(oDate.getMonth()+1)+'月'+toDou(oDate.getDate())+'日'+toDou(oDate.getHours())+':'+toDou(oDate.getMinutes())+':'+toDou(oDate.getSeconds());
+	};
+});
+app.filter('toDou', function (){
+	return function (input){
+		return Number(input).toFixed(2);
+	};
+});
+app.filter('rmb', function (){
+	return function (input){
+		//alert(input);
+		return '￥'+input;
+	};
+});
+
+app.controller('aaa', function ($scope){
+	$scope.arr=[
+		{name: 'xxx鞋', price: 12.8, time: 1429931918},
+		{name: 'xxx衣服', price: 250, time: 1429930918},
+		{name: 'xxx帽子', price: 25.6, time: 1429921918},
+	];
+});
+</script>
+</head>
+
+<body ng-controller="aaa">
+<ul>
+	<li ng-repeat="item in arr">
+    	<h2>{{item.name}}</h2>
+        单价：{{item.price|toDou|rmb}}，
+        上架时间：{{item.time|time2date}}
+    </li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+
