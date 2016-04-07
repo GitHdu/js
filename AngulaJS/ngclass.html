@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="my_app">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+.white {background:white;}
+.ccc {background:#CCC;}
+</style>
+<script src="angular.js"></script>
+<script>
+var app=angular.module('my_app', []);
+
+app.controller('test', function ($scope){
+	$scope.arr=[12,5,8,9,10,6,1,2];
+});
+</script>
+</head>
+
+<body ng-controller="test">
+<ul>
+	<li ng-repeat="i in arr" ng-class="{white: $index%2==0, ccc: $index%2==1}">{{i}}</li>
+</ul>
+</body>
+</html>
+
+
+
+
