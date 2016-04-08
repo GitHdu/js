@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="my_app">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+div {width:200px; height:200px; background:#CCC; position:absolute;}
+</style>
+<script src="angular.js"></script>
+<script src="jquery-1.7.2.js"></script>
+<script>
+var app=angular.module('my_app', []);
+
+app.directive('drag', function (){
+	return function (scope, element,attr){
+		element.bind('mousedown', function (ev){
+			var disX=ev.clientX-element[0].offsetLeft;
+			var disY=ev.clientY-element[0].offsetTop;
+
+			$(document).bind('mousemove', function (ev){
+				element.css({
+					'left': ev.clientX-disX+'px',
+					'top': ev.clientY-disY+'px'
+				});
+			});
+			$(document).bind('mouseup',function (){
+				$(document).unbind('mousemove');
+				$(document).unbind('mouseup');
+			});
+		});
+	};
+});
+</script>
+</head>
+
+<body>
+<div drag></div>
+<div drag></div>
+<div drag></div>
+<div drag></div>
+</body>
+</html>

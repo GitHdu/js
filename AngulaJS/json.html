@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app="test">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+
+</style>
+<script src="angular.js"></script>
+<script>
+var app=angular.module('test', []);
+
+app.controller('aaa', function ($scope){
+	$scope.json={a: 12, b: 5, c: 8};
+
+	$scope.sum=function ()
+	{
+		var r=0;
+
+		for(var i in $scope.json)
+		{
+			r+=$scope.json[i];
+		}
+
+		return r;
+	};
+});
+</script>
+</head>
+
+<body ng-controller="aaa">
+	<input type="number" ng-repeat="i in json" value="{{$index}}" />
+    {{sum()}}
+</body>
+</html>
+
+
+
+
+
+

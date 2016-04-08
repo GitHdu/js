@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="test">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+
+</style>
+<script src="angular.js"></script>
+<script>
+var app=angular.module('test', []);
+
+app.controller('aaa', function ($scope){
+	$scope.arr=[12, 5, 8];
+
+	//谁, 执行
+	$scope.$watch('arr', function (){
+		alert('变了');
+	}, true);
+
+	$scope.sum=function ()
+	{
+		var r=0;
+
+		for(var i=0;i<$scope.arr.length;i++)
+		{
+			r+=$scope.arr[i];
+		}
+
+		return r;
+	};
+
+	$scope.alert=function (str)
+	{
+		alert(str);
+	};
+});
+</script>
+</head>
+
+<body ng-controller="aaa">
+	<input type="number" ng-repeat="i in arr" ng-model="arr[$index]" />
+    {{sum()}}
+    <input type="button" value="看看" ng-click="alert(arr)" />
+</body>
+</html>
+
+
+
+
+
+
