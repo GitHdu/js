@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>任务列表</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <style type="text/css">
+    body.container {
+        max-width: 600px;
+    }
+
+    .m_t20 {
+        margin-top: 20px;
+    }
+
+    .checkbox {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .done {
+        color: #ccc;
+    }
+
+    .done>.checkbox>label>span {
+        text-decoration: line-through;
+    }
+    </style>
+</head>
+
+<body class="container" ng-app="myApp">
+    <header>
+        <h1 class="display-3">任务列表</h1>
+        <hr />
+    </header>
+    <section ng-controller="mainController">
+        <form class="input-group input-group-lg">
+            <input type="text" class="form-control" id="" ng-model="text">
+            <span class="input-group-btn">
+		<button class="btn btn-secondary" ng-click="add()">添加</button>
+	</span>
+        </form>
+        <ul class="list-group m_t20">
+            <li class="list-group-item" ng-class="{'done':item.done}" ng-repeat="item in TodoList">
+                <button type="button" class="close" ng-click="delete(item)">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="item.done" /><span>{{item.text}}</span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <p>总共<strong>{{TodoList.length}}</strong>个任务，已经完成<strong>{{doneCount()}}</strong>个</p>
+    </section>
+    <script type="text/javascript" src="./vendor/angular/angularjs.js"></script>
+    <script>
+    (function(window) {
+        window.angular.module('myApp', []);
+        window.angular.module('myApp'). //只传入一个参数，代表获取myApp模块
+        controller('mainController', ['$scope', '$http', function($scope, $http) {
+            $scope.text = '';
+            $scope.TodoList = [{
+                text: 'learn English',
+                done: false
+            }, {
+                text: 'learn Chinese',
+                done: false
+            }];
+            $scope.add = function() {
+                var text = $scope.text.trim();
+                if (text) {
+                    $scope.TodoList.push({
+                        text: text,
+                        done: false
+                    })
+                }
+                $scope.text = '';
+            };
+            $scope.delete = function(todo) {
+                var index = $scope.TodoList.indexOf(todo);
+                if (index != -1) {
+                    $scope.TodoList.splice(index, 1)
+                }
+            };
+            $scope.doneCount = function() {
+                var item = $scope.TodoList.filter(function(item) {
+                    return item.done;
+                });
+                return item.length;
+            }
+
+        }])
+    })(window);
+    </script>
+</body>
+
+</html>
